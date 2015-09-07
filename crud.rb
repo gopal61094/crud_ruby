@@ -8,7 +8,8 @@ begin
 	puts "2.Read"
 	puts "3.Update"
 	puts "4.Delete"
-	puts "5.exit"
+	puts "5.Insert"
+	puts "6.exit"
 	choice = gets.to_i   #Getting desired input from user and converting into integer
 
 	case choice
@@ -41,12 +42,21 @@ begin
 		rs1=con.query "delete from cart where item_id = #{ItemId} "
 		puts con.affected_rows
 
+	when choice=5		#Inserting a new record in the table
+		puts "Insert operation"
+		puts "Enter the id"
+		Item_id=gets.to_i
+		puts "Enter the name of the item"
+		Value=gets
+		rs1=con.query "Insert into cart values(#{Item_id},'#{Value}')"
+		puts con.affected_rows
+
 	else				#Default case 
 		puts "Invalid option"
 		break
 	end
 
-	break if(choice>=5)
+	break if(choice>=6)
 	end
 
 rescue Mysql::Error => e  #Rescue block to catch any error
